@@ -6,7 +6,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    minitest (5.14.2)
+    minitest (5.16.3)
     rake (13.0.3)
 
 PLATFORMS
@@ -14,7 +14,7 @@ PLATFORMS
 
 DEPENDENCIES
   hexlet_code!
-  minitest (~> 5.0)
+  minitest (~> 5.16)
   rake (~> 13.0)
 
 BUNDLED WITH
