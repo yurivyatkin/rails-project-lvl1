@@ -8,7 +8,7 @@ module HexletCode
 
   UNPARED_ELEMENTS = %w[br hr img input].freeze
 
-  PARED_ELENENTS = %w[div span p h1 h2 h3 h4 h5 h6].freeze
+  PARED_ELENENTS = %w[div span p h1 h2 h3 h4 h5 h6 label].freeze
 
   class Tag
     def self.build(tag, attributes = {})
@@ -17,7 +17,10 @@ module HexletCode
 
       return "<#{normalized_tag}#{attributes_string}>" if UNPARED_ELEMENTS.include?(normalized_tag)
 
-      return "<#{normalized_tag}#{attributes_string}></#{normalized_tag}>" if PARED_ELENENTS.include?(normalized_tag)
+      content = block_given? ? yield : ''
+      if PARED_ELENENTS.include?(normalized_tag)
+        return "<#{normalized_tag}#{attributes_string}>#{content}</#{normalized_tag}>"
+      end
 
       raise 'Unknown tag'
     end
