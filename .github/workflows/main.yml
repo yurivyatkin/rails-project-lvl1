@@ -14,5 +14,5 @@ jobs:
         bundler-cache: true
     - name: Run Rubocop
       run: make lint
-    - name: Run the default task
-      run: bundle exec rake
+    - name: Run tests
+      run: make test
