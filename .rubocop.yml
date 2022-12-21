@@ -2,4 +2,5 @@ Style/Documentation:
   Enabled: false
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
   TargetRubyVersion: 3.0.2
