@@ -6,4 +6,8 @@ module HexletCode
   class Error < StandardError; end
   # Your code goes here...
   autoload :Tag, 'hexlet_code/tag'
+
+  def self.form_for(_entity)
+    '<form action="#" method="post"></form>'
+  end
 end
