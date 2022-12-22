@@ -7,7 +7,8 @@ module HexletCode
   # Your code goes here...
   autoload :Tag, 'hexlet_code/tag'
 
-  def self.form_for(_entity)
-    '<form action="#" method="post"></form>'
+  def self.form_for(_entity, options = {})
+    url = options[:url] || '#'
+    "<form action=\"#{url}\" method=\"post\"></form>"
   end
 end
