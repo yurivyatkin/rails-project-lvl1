@@ -7,16 +7,14 @@ class TagTest < Minitest::Test
 
   def test_form_for
     user = User.new name: 'rob'
-    form = HexletCode.form_for user do |f|
-    end
+    form = HexletCode.form_for user
 
     assert_equal('<form action="#" method="post"></form>', form)
   end
 
   def test_form_for_with_url
     user = User.new name: 'rob'
-    form = HexletCode.form_for user, url: '/users' do |f|
-    end
+    form = HexletCode.form_for user, url: '/users'
 
     assert_equal('<form action="/users" method="post"></form>', form)
   end
