@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class TagTest < Minitest::Test
+class FormForTest < Minitest::Test
   User = Struct.new(:name, :job, :gender, keyword_init: true)
   def setup
     @user = User.new name: 'rob', job: 'hexlet', gender: 'm'
