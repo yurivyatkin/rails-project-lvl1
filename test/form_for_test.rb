@@ -19,4 +19,12 @@ class FormForTest < Minitest::Test
 
     assert_equal('<form action="/users" method="post"></form>', form)
   end
+
+  def test_form_for_with_block
+    form = HexletCode.form_for @user do |f|
+      f.input :name
+    end
+
+    assert_equal('<form action="#" method="post"><input name="name" type="text" value="rob"></form>', form)
+  end
 end
