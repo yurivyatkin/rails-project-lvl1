@@ -36,4 +36,17 @@ class FormForTest < Minitest::Test
     assert_equal('<form action="#" method="post"><textarea name="job" cols="20" rows="40">hexlet</textarea></form>',
                  form)
   end
+
+  def test_form_for_with_block_and_two_inputs
+    form = HexletCode.form_for @user do |f|
+      f.input :name
+      f.input :job, as: :text
+    end
+
+    expected = '<form action="#" method="post">'.dup
+    expected += '<input name="name" type="text" value="rob">'
+    expected += '<textarea name="job" cols="20" rows="40">hexlet</textarea>'
+    expected += '</form>'
+    assert_equal(expected, form)
+  end
 end

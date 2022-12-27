@@ -10,14 +10,11 @@ module HexletCode
 
   def self.form_for(entity, form_options = {})
     url = form_options[:url] || '#'
-    def entity.input(name, input_options = {})
-      if input_options[:as] == :text
-        return HexletCode::Tag.build('textarea', name: name, cols: 20, rows: 40) { self[name] }
-      end
-
-      HexletCode::Tag.build 'input', name: name, type: 'text', value: self[name]
-    end
-    content = block_given? ? yield(entity) : ''
+    form_builder = FormBuilder.new(entity)
+    # Here we abuse the fact that the block is supposed to contain calls to imput method,
+    # and that the input method returns the accumulated array of tags:
+    tags = block_given? ? yield(form_builder) : []
+    content = tags.join
     "<form action=\"#{url}\" method=\"post\">#{content}</form>"
   end
 end
