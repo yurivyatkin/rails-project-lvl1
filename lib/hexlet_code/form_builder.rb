@@ -2,6 +2,8 @@
 
 module HexletCode
   class FormBuilder
-    def initialize(entity); end
+    def initialize(entity)
+      @entity = entity
+    end
   end
 end
