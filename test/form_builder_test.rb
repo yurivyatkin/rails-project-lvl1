@@ -18,4 +18,14 @@ class FormBuilderTest < Minitest::Test
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     assert_includes(form_builder.instance_variables, :@entity)
   end
+
+  def test_form_builder_has_instance_variable_tags
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    assert_includes(form_builder.instance_variables, :@tags)
+  end
+
+  def test_form_builder_instance_variable_tags_is_an_array
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    assert_instance_of(Array, form_builder.instance_variable_get(:@tags))
+  end
 end

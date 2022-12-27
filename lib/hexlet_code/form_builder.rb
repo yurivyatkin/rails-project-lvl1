@@ -4,6 +4,7 @@ module HexletCode
   class FormBuilder
     def initialize(entity)
       @entity = entity
+      @tags = []
     end
   end
 end
