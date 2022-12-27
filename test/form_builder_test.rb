@@ -28,4 +28,13 @@ class FormBuilderTest < Minitest::Test
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     assert_instance_of(Array, form_builder.instance_variable_get(:@tags))
   end
+
+  def test_form_builder_method_input
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    form_builder.input :name
+    assert_equal(
+      '<input name="name" type="text" value="Test">',
+      form_builder.instance_variable_get(:@tags)[0]
+    )
+  end
 end
