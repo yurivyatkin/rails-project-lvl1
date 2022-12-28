@@ -29,6 +29,13 @@ class FormBuilderTest < Minitest::Test
     assert_instance_of(Array, form_builder.instance_variable_get(:@tags))
   end
 
+  def test_form_builder_input_raises_when_given_field_missing_from_entity
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    assert_raises NameError do
+      form_builder.input :non_existent_field
+    end
+  end
+
   def test_form_builder_method_input
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     form_builder.input :name
