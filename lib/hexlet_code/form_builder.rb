@@ -9,7 +9,9 @@ module HexletCode
 
     def input(field, options = {})
       tag = if options[:as] == :text
-              HexletCode::Tag.build('textarea', name: field, cols: 20, rows: 40) { @entity[field] }
+              cols = options[:cols] || 20
+              rows = options[:rows] || 40
+              HexletCode::Tag.build('textarea', name: field, cols: cols, rows: rows) { @entity[field] }
             else
               HexletCode::Tag.build('input', name: field, type: 'text', value: @entity[field])
             end

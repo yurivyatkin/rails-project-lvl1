@@ -37,6 +37,15 @@ class FormForTest < Minitest::Test
                  form)
   end
 
+  def test_form_for_input_can_override_default_values
+    form = HexletCode.form_for @user do |f|
+      f.input :job, as: :text, rows: 50, cols: 60
+    end
+
+    assert_equal('<form action="#" method="post"><textarea name="job" cols="60" rows="50">hexlet</textarea></form>',
+                 form)
+  end
+
   def test_form_for_with_block_and_two_inputs
     form = HexletCode.form_for @user do |f|
       f.input :name
