@@ -37,6 +37,7 @@ class FormForTest < Minitest::Test
                  form)
   end
 
+  # TODO: should we test this here?
   def test_form_for_input_can_override_default_values
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text, rows: 50, cols: 60

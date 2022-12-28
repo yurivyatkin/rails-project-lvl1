@@ -46,4 +46,13 @@ class FormBuilderTest < Minitest::Test
       form_builder.instance_variable_get(:@tags)[0]
     )
   end
+
+  def test_form_builder_method_input_with_as_option_and_overriding_default_values
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    form_builder.input :description, as: :text, rows: 50, cols: 60
+    assert_equal(
+      '<textarea name="description" cols="60" rows="50">This is a test!</textarea>',
+      form_builder.instance_variable_get(:@tags)[0]
+    )
+  end
 end
