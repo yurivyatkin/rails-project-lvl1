@@ -38,7 +38,7 @@ It will generate the following HTML code:
 <form action="#" method="post"><input name="name" type="text" value="rob"><textarea name="job" cols="20" rows="40">hexlet</textarea></form>
 ```
 
-\[Not implemented\] Fields can have additional attributes in a hash as the last parameter:
+Fields can have additional attributes in a hash as the last parameter:
 ```Ruby
 HexletCode.form_for user, url: '#' do |f|
   f.input :name, class: 'user-input'

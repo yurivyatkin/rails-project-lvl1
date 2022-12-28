@@ -45,6 +45,15 @@ class FormBuilderTest < Minitest::Test
     )
   end
 
+  def test_form_builder_method_input_with_additional_attributes
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    form_builder.input :name, class: 'user-input'
+    assert_equal(
+      '<input name="name" type="text" value="Test" class="user-input">',
+      form_builder.instance_variable_get(:@tags)[0]
+    )
+  end
+
   def test_form_builder_method_input_with_as_option
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     form_builder.input :description, as: :text

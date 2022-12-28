@@ -8,12 +8,13 @@ module HexletCode
     end
 
     def input(field, options = {})
+      rest = options.except(:as, :cols, :rows)
       tag = if options[:as] == :text
               cols = options[:cols] || 20
               rows = options[:rows] || 40
-              HexletCode::Tag.build('textarea', name: field, cols: cols, rows: rows) { @entity[field] }
+              HexletCode::Tag.build('textarea', name: field, cols: cols, rows: rows, **rest) { @entity[field] }
             else
-              HexletCode::Tag.build('input', name: field, type: 'text', value: @entity[field])
+              HexletCode::Tag.build('input', name: field, type: 'text', value: @entity[field], **rest)
             end
       @tags << tag
     end
