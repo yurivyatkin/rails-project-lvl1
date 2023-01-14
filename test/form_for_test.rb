@@ -63,4 +63,32 @@ class FormForTest < Minitest::Test
     expected += '</form>'
     assert_equal(expected, form)
   end
+
+  def test_form_for_with_two_inputs_and_default_submit
+    form = HexletCode.form_for @user do |f|
+      f.input :name
+      f.input :job
+      f.submit
+    end
+
+    expected = '<form action="#" method="post">'.dup
+    expected += '<label for="name">Name</label><input name="name" type="text" value="rob">'
+    expected += '<label for="job">Job</label><input name="job" type="text" value="hexlet">'
+    expected += '<input type="submit" value="Save"></form>'
+    assert_equal(expected, form)
+  end
+
+  def test_form_for_with_two_inputs_and_custom_submit
+    form = HexletCode.form_for @user do |f|
+      f.input :name
+      f.input :job
+      f.submit 'Wow'
+    end
+
+    expected = '<form action="#" method="post">'.dup
+    expected += '<label for="name">Name</label><input name="name" type="text" value="rob">'
+    expected += '<label for="job">Job</label><input name="job" type="text" value="hexlet">'
+    expected += '<input type="submit" value="Wow"></form>'
+    assert_equal(expected, form)
+  end
 end

@@ -71,4 +71,20 @@ class FormBuilderTest < Minitest::Test
       form_builder.instance_variable_get(:@tags)[0]
     )
   end
+
+  def test_form_builder_method_submit_with_default_value
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    form_builder.submit
+    expected = '<input type="submit" value="Save">'
+    actual = form_builder.instance_variable_get(:@tags)[0]
+    assert_equal(expected, actual)
+  end
+
+  def test_form_builder_method_submit_with_custom_value
+    form_builder = HexletCode::FormBuilder.new(@test_entity)
+    form_builder.submit 'Wow'
+    expected = '<input type="submit" value="Wow">'
+    actual = form_builder.instance_variable_get(:@tags)[0]
+    assert_equal(expected, actual)
+  end
 end

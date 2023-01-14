@@ -19,5 +19,9 @@ module HexletCode
             end
       @tags << tag
     end
+
+    def submit(title = 'Save')
+      @tags << HexletCode::Tag.build('input', type: 'submit', value: title)
+    end
   end
 end
