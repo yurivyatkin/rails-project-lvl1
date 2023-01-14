@@ -24,8 +24,11 @@ class FormForTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :name
     end
-
-    assert_equal('<form action="#" method="post"><input name="name" type="text" value="rob"></form>', form)
+    expected = '<form action="#" method="post">'.dup
+    expected += '<label for="name">Name</label>'
+    expected += '<input name="name" type="text" value="rob">'
+    expected += '</form>'
+    assert_equal(expected, form)
   end
 
   def test_form_for_with_block_and_input_as_text
@@ -54,6 +57,7 @@ class FormForTest < Minitest::Test
     end
 
     expected = '<form action="#" method="post">'.dup
+    expected += '<label for="name">Name</label>'
     expected += '<input name="name" type="text" value="rob">'
     expected += '<textarea name="job" cols="20" rows="40">hexlet</textarea>'
     expected += '</form>'

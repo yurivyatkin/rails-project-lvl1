@@ -39,19 +39,19 @@ class FormBuilderTest < Minitest::Test
   def test_form_builder_method_input
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     form_builder.input :name
-    assert_equal(
-      '<input name="name" type="text" value="Test">',
-      form_builder.instance_variable_get(:@tags)[0]
-    )
+    expected = '<label for="name">Name</label>'.dup
+    expected += '<input name="name" type="text" value="Test">'
+    actual = form_builder.instance_variable_get(:@tags)[0]
+    assert_equal(expected, actual)
   end
 
   def test_form_builder_method_input_with_additional_attributes
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     form_builder.input :name, class: 'user-input'
-    assert_equal(
-      '<input name="name" type="text" value="Test" class="user-input">',
-      form_builder.instance_variable_get(:@tags)[0]
-    )
+    expected = '<label for="name">Name</label>'.dup
+    expected += '<input name="name" type="text" value="Test" class="user-input">'
+    actual = form_builder.instance_variable_get(:@tags)[0]
+    assert_equal(expected, actual)
   end
 
   def test_form_builder_method_input_with_as_option

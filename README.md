@@ -35,7 +35,7 @@ end
 ```
 It will generate the following HTML code:
 ```HTML
-<form action="#" method="post"><input name="name" type="text" value="rob"><textarea name="job" cols="20" rows="40">hexlet</textarea></form>
+<form action="#" method="post"><label for="name">Name</label><input name="name" type="text" value="rob"><textarea name="job" cols="20" rows="40">hexlet</textarea></form>
 ```
 
 Fields can have additional attributes in a hash as the last parameter:
@@ -47,7 +47,7 @@ end
 ```
 It generated the following HTML code:
 ```HTML
-<form action="#" method="post"><input name="name" type="text" value="rob" class="user-input"><input name="job" type="text" value=""></form>
+<form action="#" method="post"><label for="name">Name</label><input name="name" type="text" value="rob" class="user-input"><label for="job">Job</label><input name="job" type="text" value=""></form>
 ``` 
 
 Fields may have default values, which can be overridden. For example, this code
