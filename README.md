@@ -3,7 +3,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/yurivyatkin/rails-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/yurivyatkin/rails-project-lvl1/actions)
 
-This gem can be used to generate HTML forms using a DSL. This DSL follows the guidelines from the project "Form Generator", which is a part of the [Ruby-on-Rails](https://ru.hexlet.io/programs/rails) course, offered by [Hexlet](https://hexlet.io/) (in Russian language only, currently).
+Use this gem to generate HTML forms using a DSL. This DSL follows the guidelines from the project "Form Generator," which is a part of the [Ruby-on-Rails](https://ru.hexlet.io/programs/rails) course offered by [Hexlet](https://hexlet.io/) (in the Russian language only, currently).
 
 ## Installation
 
@@ -19,7 +19,7 @@ And then execute:
 
 ## Usage
 
-When the gem is installed, your code will have access to the `HexletCode` class, which provides the method `form_for` for generating HTML code.
+After installing this gem, your code will have access to the `HexletCode` class, which provides the method `form_for` for generating HTML code.
 
 The method `form_for` expects at least one mandatory argument, which should be a Ruby object with fields of primitive types (currently, we support only strings).
 
@@ -56,11 +56,11 @@ HexletCode.form_for user do |f|
   f.input :job, as: :text
 end
 ```
-will generate HTLM with the default values, like so:
+will generate HTLM with the default values like so:
 ```HTML
 <form action="#" method="post"><textarea name="job" cols="20" rows="40">hexlet</textarea></form>
 ```
-whereas, specifying the values for the `cols` and `rows` attributes,
+whereas specifying the values for the `cols` and `rows` attributes,
 ```Ruby
 HexletCode.form_for user, url: '#' do |f|
   f.input :job, as: :text, rows: 50, cols: 50
@@ -73,11 +73,12 @@ we get the customized HTML snippet:
 
 When the `input` method receives a field, which is missing from the base object (the first argument of the `form_for` method), a `NameError` will be raised.
 
+Using the method `submit`, one can add a submit button to the form, implemented as input of type "submit". The default title of the button (i.e., the value of the tag `submit`) is "Save," but passing a string parameter to the method `submit` will override this value. The code `f.submit` will generate `<input type="submit" value="Save">`, whereas the code `f.submit 'Wow'` results in `<input type="submit" value="Wow">`.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Run bundle exec rake install to install this gem onto your local machine. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
