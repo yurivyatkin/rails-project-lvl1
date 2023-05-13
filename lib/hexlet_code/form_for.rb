@@ -9,7 +9,7 @@ module HexletCode
       # and that the input method returns the accumulated array of tags:
       tags = block_given? ? yield(form_builder) : []
       content = tags.join
-      "<form action=\"#{url}\" method=\"post\">#{content}</form>"
+      HexletCode::Tag.build('form', action: url.to_s, method: 'post') { content }
     end
   end
 end
