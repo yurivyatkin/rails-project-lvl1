@@ -9,13 +9,14 @@ module HexletCode
 
     def input(field, options = {})
       rest = options.except(:as, :cols, :rows)
+      value = @entity.public_send(field)
       tag = if options[:as] == :text
               cols = options[:cols] || 20
               rows = options[:rows] || 40
-              HexletCode::Tag.build('textarea', name: field, cols: cols, rows: rows, **rest) { @entity[field] }
+              HexletCode::Tag.build('textarea', name: field, cols: cols, rows: rows, **rest) { value }
             else
               HexletCode::Tag.build('label', for: field) { field.capitalize } +
-                HexletCode::Tag.build('input', name: field, type: 'text', value: @entity[field], **rest)
+                HexletCode::Tag.build('input', name: field, type: 'text', value: value, **rest)
             end
       @tags << tag
     end
