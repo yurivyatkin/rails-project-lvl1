@@ -4,7 +4,7 @@ module HexletCode
   class FormBuilder
     def initialize(entity)
       @entity = entity
-      @tags = []
+      @controls = []
     end
 
     def input(field, options = {})
@@ -18,16 +18,16 @@ module HexletCode
               HexletCode::Tag.build('label', for: field) { field.capitalize } +
                 HexletCode::Tag.build('input', name: field, type: 'text', value: value, **rest)
             end
-      @tags << tag
+      @controls << tag
     end
 
     def submit(title = 'Save')
-      @tags << HexletCode::Tag.build('input', type: 'submit', value: title)
+      @controls << HexletCode::Tag.build('input', type: 'submit', value: title)
     end
 
     def build(form_options = {})
       url = form_options[:url] || '#'
-      HexletCode::Tag.build('form', action: url.to_s, method: 'post') { @tags.join }
+      HexletCode::Tag.build('form', action: url.to_s, method: 'post') { @controls.join }
     end
   end
 end

@@ -21,12 +21,12 @@ class FormBuilderTest < Minitest::Test
 
   def test_form_builder_has_instance_variable_tags
     form_builder = HexletCode::FormBuilder.new(@test_entity)
-    assert_includes(form_builder.instance_variables, :@tags)
+    assert_includes(form_builder.instance_variables, :@controls)
   end
 
   def test_form_builder_instance_variable_tags_is_an_array
     form_builder = HexletCode::FormBuilder.new(@test_entity)
-    assert_instance_of(Array, form_builder.instance_variable_get(:@tags))
+    assert_instance_of(Array, form_builder.instance_variable_get(:@controls))
   end
 
   def test_form_builder_input_raises_when_given_field_missing_from_entity
@@ -41,7 +41,7 @@ class FormBuilderTest < Minitest::Test
     form_builder.input :name
     expected = '<label for="name">Name</label>'.dup
     expected += '<input name="name" type="text" value="Test">'
-    actual = form_builder.instance_variable_get(:@tags)[0]
+    actual = form_builder.instance_variable_get(:@controls)[0]
     assert_equal(expected, actual)
   end
 
@@ -50,7 +50,7 @@ class FormBuilderTest < Minitest::Test
     form_builder.input :name, class: 'user-input'
     expected = '<label for="name">Name</label>'.dup
     expected += '<input name="name" type="text" value="Test" class="user-input">'
-    actual = form_builder.instance_variable_get(:@tags)[0]
+    actual = form_builder.instance_variable_get(:@controls)[0]
     assert_equal(expected, actual)
   end
 
@@ -59,7 +59,7 @@ class FormBuilderTest < Minitest::Test
     form_builder.input :description, as: :text
     assert_equal(
       '<textarea name="description" cols="20" rows="40">This is a test!</textarea>',
-      form_builder.instance_variable_get(:@tags)[0]
+      form_builder.instance_variable_get(:@controls)[0]
     )
   end
 
@@ -68,7 +68,7 @@ class FormBuilderTest < Minitest::Test
     form_builder.input :description, as: :text, rows: 50, cols: 60
     assert_equal(
       '<textarea name="description" cols="60" rows="50">This is a test!</textarea>',
-      form_builder.instance_variable_get(:@tags)[0]
+      form_builder.instance_variable_get(:@controls)[0]
     )
   end
 
@@ -76,7 +76,7 @@ class FormBuilderTest < Minitest::Test
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     form_builder.submit
     expected = '<input type="submit" value="Save">'
-    actual = form_builder.instance_variable_get(:@tags)[0]
+    actual = form_builder.instance_variable_get(:@controls)[0]
     assert_equal(expected, actual)
   end
 
@@ -84,7 +84,7 @@ class FormBuilderTest < Minitest::Test
     form_builder = HexletCode::FormBuilder.new(@test_entity)
     form_builder.submit 'Wow'
     expected = '<input type="submit" value="Wow">'
-    actual = form_builder.instance_variable_get(:@tags)[0]
+    actual = form_builder.instance_variable_get(:@controls)[0]
     assert_equal(expected, actual)
   end
 end
