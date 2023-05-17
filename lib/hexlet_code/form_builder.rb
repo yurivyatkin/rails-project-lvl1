@@ -24,5 +24,10 @@ module HexletCode
     def submit(title = 'Save')
       @tags << HexletCode::Tag.build('input', type: 'submit', value: title)
     end
+
+    def build(form_options = {})
+      url = form_options[:url] || '#'
+      HexletCode::Tag.build('form', action: url.to_s, method: 'post') { @tags.join }
+    end
   end
 end
