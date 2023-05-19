@@ -17,7 +17,7 @@ module HexletCode
         return "<#{normalized_tag}#{attributes_string}>#{content}</#{normalized_tag}>"
       end
 
-      raise 'Unknown tag'
+      raise ArgumentError, 'Unsupported tag'
     end
 
     private_class_method def self.hash_to_string(hash)

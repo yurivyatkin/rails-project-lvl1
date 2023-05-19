@@ -11,7 +11,7 @@ class TagTest < Minitest::Test
   end
 
   def test_it_raises_given_unknown_tag
-    assert_raises RuntimeError do
+    assert_raises ArgumentError do
       HexletCode::Tag.build('qq')
     end
   end
