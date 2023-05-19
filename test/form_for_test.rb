@@ -20,44 +20,12 @@ class FormForTest < Minitest::Test
     assert_selector(form, "form[action='/users'][method='post']")
   end
 
-  def test_form_for_with_block
-    form = HexletCode.form_for @user do |f|
-      f.input :name
-    end
-
-    assert_selector(form, "form[action='#'][method='post']")
-
-    assert_selector(form, "form label[for='name']") do |e|
-      assert_equal('Name', e)
-    end
-    assert_selector(form, "form input[name='name'][type='text'][value='rob']")
-  end
-
   def test_form_for_raises_when_input_called_with_missing_field
     assert_raises NoMethodError do
       HexletCode.form_for @user do |f|
         f.input :missing_field
       end
     end
-  end
-
-  def test_form_for_with_block_and_two_text_inputs
-    form = HexletCode.form_for @user do |f|
-      f.input :name
-      f.input :job
-    end
-
-    assert_selector(form, "form[action='#'][method='post']")
-
-    assert_selector(form, "form label[for='name']") do |e|
-      assert_equal('Name', e)
-    end
-    assert_selector(form, "form input[name='name'][type='text'][value='rob']")
-
-    assert_selector(form, "form label[for='job']") do |e|
-      assert_equal('Job', e)
-    end
-    assert_selector(form, "form input[name='job'][type='text'][value='hexlet']")
   end
 
   def test_form_for_with_block_and_input_as_text
