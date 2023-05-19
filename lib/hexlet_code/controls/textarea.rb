@@ -13,7 +13,7 @@ module HexletCode
       rows = @attributes[:rows] || 40
       HexletCode::Tag.build('label', for: @name) do
         @name.capitalize
-      end + HexletCode::Tag.build('textarea', name: @name, cols: cols, rows: rows, **@attributes) { @value }
+      end + HexletCode::Tag.build('textarea', name: @name, cols:, rows:, **@attributes) { @value }
     end
   end
 end

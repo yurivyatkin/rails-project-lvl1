@@ -27,7 +27,7 @@ module HexletCode
       method = form_options[:method] || 'post'
       rest = form_options.except(:url, :method)
       content = @controls.map(&:build).join
-      HexletCode::Tag.build('form', action: url.to_s, method: method, **rest) { content }
+      HexletCode::Tag.build('form', action: url.to_s, method:, **rest) { content }
     end
   end
 end
