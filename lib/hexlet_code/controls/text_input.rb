@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HexletCode
   class TextInput
     def initialize(name, value, **attributes)

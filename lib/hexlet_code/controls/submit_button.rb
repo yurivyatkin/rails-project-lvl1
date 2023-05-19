@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HexletCode
   class SubmitButton
     def initialize(value, **attributes)
