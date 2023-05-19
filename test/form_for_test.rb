@@ -66,6 +66,10 @@ class FormForTest < Minitest::Test
     end
 
     assert_selector(form, "form[action='#'][method='post']")
+
+    assert_selector(form, "form label[for='job']") do |e|
+      assert_equal('Job', e)
+    end
     assert_selector(form, "form textarea[name='job'][cols='20'][rows='40']") do |e|
       assert_equal('hexlet', e)
     end
@@ -77,6 +81,10 @@ class FormForTest < Minitest::Test
     end
 
     assert_selector(form, "form[action='#'][method='post']")
+
+    assert_selector(form, "form label[for='job']") do |e|
+      assert_equal('Job', e)
+    end
     assert_selector(form, "form textarea[name='job'][cols='60'][rows='50']") do |e|
       assert_equal('hexlet', e)
     end
@@ -95,6 +103,9 @@ class FormForTest < Minitest::Test
     end
     assert_selector(form, "form input[name='name'][type='text'][value='rob']")
 
+    assert_selector(form, "form label[for='job']") do |e|
+      assert_equal('Job', e)
+    end
     assert_selector(form, "form textarea[name='job'][cols='20'][rows='40']") do |e|
       assert_equal('hexlet', e)
     end
