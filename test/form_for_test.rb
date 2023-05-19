@@ -11,24 +11,53 @@ class FormForTest < Minitest::Test
   def test_form_for_empty
     form = HexletCode.form_for @user
 
-    assert_equal('<form action="#" method="post"></form>', form)
+    assert_selector(form, "form[action='#'][method='post']")
   end
 
   def test_form_for_empty_with_url
     form = HexletCode.form_for @user, url: '/users'
 
-    assert_equal('<form action="/users" method="post"></form>', form)
+    assert_selector(form, "form[action='/users'][method='post']")
   end
 
   def test_form_for_with_block
     form = HexletCode.form_for @user do |f|
       f.input :name
     end
-    expected = '<form action="#" method="post">'.dup
-    expected += '<label for="name">Name</label>'
-    expected += '<input name="name" type="text" value="rob">'
-    expected += '</form>'
-    assert_equal(expected, form)
+
+    assert_selector(form, "form[action='#'][method='post']")
+
+    assert_selector(form, "form label[for='name']") do |e|
+      assert_equal('Name', e)
+    end
+    assert_selector(form, "form input[name='name'][type='text'][value='rob']")
+  end
+
+  def test_form_for_raises_when_input_called_with_missing_field
+    assert_raises NoMethodError do
+      HexletCode.form_for @user do |f|
+        f.input :missing_field
+      end
+    end
+  end
+
+  def test_form_for_with_block_and_two_text_inputs
+    form = HexletCode.form_for @user do |f|
+      f.input :name
+      f.input :job
+    end
+
+    assert_selector(form, "form[action='#'][method='post']")
+
+    assert_selector(form, "form label[for='name']") do |e|
+      assert_equal('Name', e)
+    end
+    assert_selector(form, "form input[name='name'][type='text'][value='rob']")
+
+    assert_selector(form, "form label[for='job']") do |e|
+      assert_equal('Job', e)
+    end
+    assert_selector(form, "form input[name='job'][type='text'][value='hexlet']")
   end
 
   def test_form_for_with_block_and_input_as_text
@@ -36,32 +65,39 @@ class FormForTest < Minitest::Test
       f.input :job, as: :text
     end
 
-    assert_equal('<form action="#" method="post"><textarea name="job" cols="20" rows="40">hexlet</textarea></form>',
-                 form)
+    assert_selector(form, "form[action='#'][method='post']")
+    assert_selector(form, "form textarea[name='job'][cols='20'][rows='40']") do |e|
+      assert_equal('hexlet', e)
+    end
   end
 
-  # TODO: should we test this here?
-  def test_form_for_input_can_override_default_values
+  def test_form_for_input_as_text_can_override_default_values
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text, rows: 50, cols: 60
     end
 
-    assert_equal('<form action="#" method="post"><textarea name="job" cols="60" rows="50">hexlet</textarea></form>',
-                 form)
+    assert_selector(form, "form[action='#'][method='post']")
+    assert_selector(form, "form textarea[name='job'][cols='60'][rows='50']") do |e|
+      assert_equal('hexlet', e)
+    end
   end
 
-  def test_form_for_with_block_and_two_inputs
+  def test_form_for_with_block_and_one_text_input_and_one_textarea
     form = HexletCode.form_for @user do |f|
       f.input :name
       f.input :job, as: :text
     end
 
-    expected = '<form action="#" method="post">'.dup
-    expected += '<label for="name">Name</label>'
-    expected += '<input name="name" type="text" value="rob">'
-    expected += '<textarea name="job" cols="20" rows="40">hexlet</textarea>'
-    expected += '</form>'
-    assert_equal(expected, form)
+    assert_selector(form, "form[action='#'][method='post']")
+
+    assert_selector(form, "form label[for='name']") do |e|
+      assert_equal('Name', e)
+    end
+    assert_selector(form, "form input[name='name'][type='text'][value='rob']")
+
+    assert_selector(form, "form textarea[name='job'][cols='20'][rows='40']") do |e|
+      assert_equal('hexlet', e)
+    end
   end
 
   def test_form_for_with_two_inputs_and_default_submit
@@ -71,11 +107,19 @@ class FormForTest < Minitest::Test
       f.submit
     end
 
-    expected = '<form action="#" method="post">'.dup
-    expected += '<label for="name">Name</label><input name="name" type="text" value="rob">'
-    expected += '<label for="job">Job</label><input name="job" type="text" value="hexlet">'
-    expected += '<input type="submit" value="Save"></form>'
-    assert_equal(expected, form)
+    assert_selector(form, "form[action='#'][method='post']")
+
+    assert_selector(form, "form label[for='name']") do |e|
+      assert_equal('Name', e)
+    end
+    assert_selector(form, "form input[name='name'][type='text'][value='rob']")
+
+    assert_selector(form, "form label[for='job']") do |e|
+      assert_equal('Job', e)
+    end
+    assert_selector(form, "form input[name='job'][type='text'][value='hexlet']")
+
+    assert_selector(form, "form input[type='submit'][value='Save']")
   end
 
   def test_form_for_with_two_inputs_and_custom_submit
@@ -85,10 +129,18 @@ class FormForTest < Minitest::Test
       f.submit 'Wow'
     end
 
-    expected = '<form action="#" method="post">'.dup
-    expected += '<label for="name">Name</label><input name="name" type="text" value="rob">'
-    expected += '<label for="job">Job</label><input name="job" type="text" value="hexlet">'
-    expected += '<input type="submit" value="Wow"></form>'
-    assert_equal(expected, form)
+    assert_selector(form, "form[action='#'][method='post']")
+
+    assert_selector(form, "form label[for='name']") do |e|
+      assert_equal('Name', e)
+    end
+    assert_selector(form, "form input[name='name'][type='text'][value='rob']")
+
+    assert_selector(form, "form label[for='job']") do |e|
+      assert_equal('Job', e)
+    end
+    assert_selector(form, "form input[name='job'][type='text'][value='hexlet']")
+
+    assert_selector(form, "form input[type='submit'][value='Wow']")
   end
 end
