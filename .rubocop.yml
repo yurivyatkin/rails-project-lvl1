@@ -2,6 +2,9 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   TargetRubyVersion: 3.0.2
+Metrics/ClassLength:
+  Exclude:
+    - 'test/**/*'
 Metrics/MethodLength:
   Exclude:
     - 'test/**/*'
