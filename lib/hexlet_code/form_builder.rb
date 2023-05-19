@@ -8,26 +8,24 @@ module HexletCode
     end
 
     def input(field, options = {})
-      rest = options.except(:as, :cols, :rows)
+      rest = options.except(:as)
       value = @entity.public_send(field)
-      tag = if options[:as] == :text
-              cols = options[:cols] || 20
-              rows = options[:rows] || 40
-              HexletCode::Tag.build('textarea', name: field, cols: cols, rows: rows, **rest) { value }
-            else
-              HexletCode::Tag.build('label', for: field) { field.capitalize } +
-                HexletCode::Tag.build('input', name: field, type: 'text', value: value, **rest)
-            end
-      @controls << tag
+      control = if options[:as] == :text
+                  HexletCode::TextArea.new(field, value, **rest)
+                else
+                  HexletCode::TextInput.new(field, value, **rest)
+                end
+      @controls << control
     end
 
-    def submit(title = 'Save')
-      @controls << HexletCode::Tag.build('input', type: 'submit', value: title)
+    def submit(title = 'Save', **attributes)
+      @controls << HexletCode::SubmitButton.new(title, **attributes)
     end
 
     def build(form_options = {})
       url = form_options[:url] || '#'
-      HexletCode::Tag.build('form', action: url.to_s, method: 'post') { @controls.join }
+      content = @controls.map(&:build).join
+      HexletCode::Tag.build('form', action: url.to_s, method: 'post') { content }
     end
   end
 end
