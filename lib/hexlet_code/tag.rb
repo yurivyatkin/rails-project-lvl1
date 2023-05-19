@@ -20,7 +20,7 @@ module HexletCode
       raise 'Unknown tag'
     end
 
-    def self.hash_to_string(hash)
+    private_class_method def self.hash_to_string(hash)
       result = ''.dup
       hash.each_pair { |k, v| result << " #{k}=\"#{v}\"" }
       result

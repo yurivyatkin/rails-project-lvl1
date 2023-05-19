@@ -6,7 +6,7 @@ class TagTest < Minitest::Test
   def test_hash_to_string
     assert_equal(
       ' type="submit" value="Save"',
-      HexletCode::Tag.hash_to_string({ type: 'submit', value: 'Save' })
+      HexletCode::Tag.send(:hash_to_string, { type: 'submit', value: 'Save' })
     )
   end
 
