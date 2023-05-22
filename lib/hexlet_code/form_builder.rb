@@ -10,11 +10,8 @@ module HexletCode
     def input(field, options = {})
       rest = options.except(:as)
       value = @entity.public_send(field)
-      control = if options[:as] == :text
-                  HexletCode::TextArea.new(field, value, **rest)
-                else
-                  HexletCode::TextInput.new(field, value, **rest)
-                end
+      type = options[:as] == :text ? 'TextArea' : 'TextInput'
+      control = Object.const_get("HexletCode::#{type}").new(field, value, **rest)
       @controls << control
     end
 
