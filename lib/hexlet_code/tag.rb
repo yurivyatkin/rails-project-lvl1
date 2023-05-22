@@ -5,7 +5,7 @@ module HexletCode
 
   PAIRED_TAGS = %w[div span p h1 h2 h3 h4 h5 h6 label textarea form].freeze
 
-  class Tag
+  module Tag
     def self.build(control, attributes = {})
       normalized_tag = control.downcase
       attributes_string = hash_to_string(attributes)
