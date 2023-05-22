@@ -10,5 +10,3 @@ gem 'rake', '~> 13.0'
 gem 'minitest', '~> 5.16'
 
 gem 'rubocop', '~> 1.41'
-
-gem 'nokogiri', '~> 1.15'

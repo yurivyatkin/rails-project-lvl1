@@ -6,19 +6,10 @@ require 'hexlet_code'
 require 'minitest/autorun'
 require 'minitest/assertions'
 
-require 'nokogiri'
+def load_fixture(filename)
+  File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
+end
 
-module Minitest
-  module Assertions
-    def assert_selector(html_string, css_selector)
-      doc = Nokogiri::HTML.parse(html_string)
-      elements = doc.css(css_selector)
-
-      assert(!elements.empty?, "No elements found matching CSS selector '#{css_selector}'")
-
-      elements.each do |element|
-        yield element.content.strip if block_given?
-      end
-    end
-  end
+def normalize_html(html_string)
+  html_string.strip.gsub(/>\s+</, '><')
 end
