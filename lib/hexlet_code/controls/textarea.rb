@@ -11,9 +11,12 @@ module HexletCode
     def build
       cols = @attributes[:cols] || 20
       rows = @attributes[:rows] || 40
+      rest = @attributes.except(:cols, :rows)
       HexletCode::Tag.build('label', for: @name) do
         @name.capitalize
-      end + HexletCode::Tag.build('textarea', name: @name, cols:, rows:, **@attributes) { @value }
+      end + HexletCode::Tag.build('textarea', name: @name, cols:, rows:, **rest) do
+        @value
+      end
     end
   end
 end
