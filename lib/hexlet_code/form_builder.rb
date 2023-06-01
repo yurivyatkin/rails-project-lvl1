@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'controls'
+
 module HexletCode
   class FormBuilder
     def initialize(entity)
@@ -11,12 +13,12 @@ module HexletCode
       rest = options.except(:as)
       value = @entity.public_send(field)
       type = options[:as] == :text ? 'TextArea' : 'TextInput'
-      control = Object.const_get("HexletCode::#{type}").new(field, value, **rest)
+      control = Object.const_get("HexletCode::Controls::#{type}").new(field, value, **rest)
       @controls << control
     end
 
     def submit(title = 'Save', **attributes)
-      @controls << HexletCode::SubmitButton.new(title, **attributes)
+      @controls << HexletCode::Controls::SubmitButton.new(title, **attributes)
     end
 
     def build(form_options = {})
