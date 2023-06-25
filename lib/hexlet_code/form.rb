@@ -14,6 +14,8 @@ module HexletCode
       rest = options.except(:as)
       value = @entity.public_send(field)
       type = (options[:as] || 'input').capitalize
+      label = HexletCode::Controls::Label.new(field, value, **rest)
+      @controls << label
       control = Object.const_get("HexletCode::Controls::#{type}").new(field, value, **rest)
       @controls << control
     end

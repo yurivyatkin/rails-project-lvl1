@@ -2,7 +2,7 @@
 
 module HexletCode
   module Controls
-    class Input
+    class Label
       def initialize(name, value, **attributes)
         @name = name
         @value = value
@@ -10,7 +10,9 @@ module HexletCode
       end
 
       def build
-        HexletCode::Tag.build('input', name: @name, type: 'text', value: @value, **@attributes)
+        HexletCode::Tag.build('label', for: @name) do
+          @name.capitalize
+        end
       end
     end
   end
