@@ -2,8 +2,8 @@
 
 module HexletCode
   module Controls
-    autoload :SubmitButton, 'hexlet_code/controls/submit_button'
-    autoload :TextArea, 'hexlet_code/controls/textarea'
-    autoload :TextInput, 'hexlet_code/controls/text_input'
+    autoload :Submit, 'hexlet_code/controls/submit'
+    autoload :Text, 'hexlet_code/controls/text'
+    autoload :Input, 'hexlet_code/controls/input'
   end
 end

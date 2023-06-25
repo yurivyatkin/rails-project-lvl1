@@ -2,7 +2,7 @@
 
 module HexletCode
   module Controls
-    class TextArea
+    class Input
       def initialize(name, value, **attributes)
         @name = name
         @value = value
@@ -10,14 +10,9 @@ module HexletCode
       end
 
       def build
-        cols = @attributes[:cols] || 20
-        rows = @attributes[:rows] || 40
-        rest = @attributes.except(:cols, :rows)
         HexletCode::Tag.build('label', for: @name) do
           @name.capitalize
-        end + HexletCode::Tag.build('textarea', name: @name, cols:, rows:, **rest) do
-          @value
-        end
+        end + HexletCode::Tag.build('input', name: @name, type: 'text', value: @value, **@attributes)
       end
     end
   end

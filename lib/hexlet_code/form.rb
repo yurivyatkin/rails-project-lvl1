@@ -13,13 +13,13 @@ module HexletCode
     def input(field, options = {})
       rest = options.except(:as)
       value = @entity.public_send(field)
-      type = options[:as] == :text ? 'TextArea' : 'TextInput'
+      type = (options[:as] || 'input').capitalize
       control = Object.const_get("HexletCode::Controls::#{type}").new(field, value, **rest)
       @controls << control
     end
 
     def submit(title = 'Save', **attributes)
-      @controls << HexletCode::Controls::SubmitButton.new(title, **attributes)
+      @controls << HexletCode::Controls::Submit.new(title, **attributes)
     end
 
     def build

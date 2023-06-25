@@ -2,7 +2,7 @@
 
 module HexletCode
   module Controls
-    class SubmitButton
+    class Submit
       def initialize(value, **attributes)
         @value = value
         @attributes = attributes
