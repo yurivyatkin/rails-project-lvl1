@@ -25,11 +25,12 @@ module HexletCode
     end
 
     def build
+      form = {}
       url = @form_options[:url] || '#'
-      method = @form_options[:method] || 'post'
-      rest = @form_options.except(:url, :method)
-      content = @controls.map(&:build).join
-      HexletCode::Tag.build('form', action: url.to_s, method:, **rest) { content }
+      rest = @form_options.except(:url)
+      form[:options] = { action: url, method: 'post' }.merge(rest)
+      form[:controls] = @controls
+      form
     end
   end
 end
