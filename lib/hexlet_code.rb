@@ -7,8 +7,8 @@ module HexletCode
   autoload :Form, 'hexlet_code/form'
 
   def self.form_for(entity, form_options = {})
-    form = Form.new(entity)
+    form = Form.new(entity, form_options)
     yield(form) if block_given?
-    form.build(form_options)
+    form.build
   end
 end

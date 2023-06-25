@@ -4,8 +4,9 @@ require_relative 'controls'
 
 module HexletCode
   class Form
-    def initialize(entity)
+    def initialize(entity, form_options = {})
       @entity = entity
+      @form_options = form_options
       @controls = []
     end
 
@@ -21,10 +22,10 @@ module HexletCode
       @controls << HexletCode::Controls::SubmitButton.new(title, **attributes)
     end
 
-    def build(form_options = {})
-      url = form_options[:url] || '#'
-      method = form_options[:method] || 'post'
-      rest = form_options.except(:url, :method)
+    def build
+      url = @form_options[:url] || '#'
+      method = @form_options[:method] || 'post'
+      rest = @form_options.except(:url, :method)
       content = @controls.map(&:build).join
       HexletCode::Tag.build('form', action: url.to_s, method:, **rest) { content }
     end
