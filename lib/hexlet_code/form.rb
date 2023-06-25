@@ -3,7 +3,7 @@
 require_relative 'controls'
 
 module HexletCode
-  class FormBuilder
+  class Form
     def initialize(entity)
       @entity = entity
       @controls = []

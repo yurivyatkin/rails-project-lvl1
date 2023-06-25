@@ -2,22 +2,22 @@
 
 require 'test_helper'
 
-class FormBuilderTest < Minitest::Test
+class FormTest < Minitest::Test
   TestEntity = Struct.new(:name, :description, keyword_init: true)
   def setup
     @test_entity = TestEntity.new(name: 'Test', description: 'This is a test!')
   end
 
-  def test_form_builder_raises_when_given_no_entity
+  def test_form_raises_when_given_no_entity
     assert_raises ArgumentError do
-      HexletCode::FormBuilder.new
+      HexletCode::Form.new
     end
   end
 
-  def test_form_builder_input_raises_when_given_field_missing_from_entity
-    form_builder = HexletCode::FormBuilder.new(@test_entity)
+  def test_form_input_raises_when_given_field_missing_from_entity
+    form = HexletCode::Form.new(@test_entity)
     assert_raises NameError do
-      form_builder.input :non_existent_field
+      form.input :non_existent_field
     end
   end
 end
