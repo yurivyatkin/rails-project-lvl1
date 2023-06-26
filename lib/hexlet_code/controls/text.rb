@@ -10,12 +10,11 @@ module HexletCode
       end
 
       def build
-        cols = @attributes[:cols] || 20
-        rows = @attributes[:rows] || 40
-        rest = @attributes.except(:cols, :rows)
-        HexletCode::Tag.build('textarea', name: @name, cols:, rows:, **rest) do
-          @value
-        end
+        control = {}
+        control[:as] = 'textarea'
+        control[:attributes] = { name: @name, cols: 20, rows: 40 }.merge(@attributes)
+        control[:content] = @value
+        control
       end
     end
   end

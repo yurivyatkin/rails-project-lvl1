@@ -15,13 +15,14 @@ module HexletCode
       value = @entity.public_send(field)
       type = (options[:as] || 'input').capitalize
       label = HexletCode::Controls::Label.new(field, value, **rest)
-      @controls << label
+      @controls << label.build
       control = Object.const_get("HexletCode::Controls::#{type}").new(field, value, **rest)
-      @controls << control
+      @controls << control.build
     end
 
     def submit(title = 'Save', **attributes)
-      @controls << HexletCode::Controls::Submit.new(title, **attributes)
+      control = HexletCode::Controls::Submit.new(title, **attributes)
+      @controls << control.build
     end
 
     def build

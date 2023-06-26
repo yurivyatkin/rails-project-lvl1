@@ -9,7 +9,10 @@ module HexletCode
       end
 
       def build
-        HexletCode::Tag.build('input', type: 'submit', value: @value, **@attributes)
+        control = {}
+        control[:as] = 'input'
+        control[:attributes] = { type: 'submit', value: @value }.merge(@attributes)
+        control
       end
     end
   end

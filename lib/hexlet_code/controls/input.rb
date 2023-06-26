@@ -10,7 +10,10 @@ module HexletCode
       end
 
       def build
-        HexletCode::Tag.build('input', name: @name, type: 'text', value: @value, **@attributes)
+        control = {}
+        control[:as] = 'input'
+        control[:attributes] = { name: @name, type: 'text', value: @value, **@attributes }
+        control
       end
     end
   end

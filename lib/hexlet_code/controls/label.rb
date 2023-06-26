@@ -10,9 +10,11 @@ module HexletCode
       end
 
       def build
-        HexletCode::Tag.build('label', for: @name) do
-          @name.capitalize
-        end
+        control = {}
+        control[:as] = 'label'
+        control[:attributes] = { for: @name }
+        control[:content] = @name.capitalize
+        control
       end
     end
   end
