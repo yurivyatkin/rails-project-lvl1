@@ -10,10 +10,10 @@ module HexletCode
       end
 
       def build
-        control = {}
-        control[:as] = 'input'
-        control[:attributes] = { name: @name, type: 'text', value: @value, **@attributes }
-        control
+        {
+          as: 'input',
+          attributes: { name: @name, type: 'text', value: @value, **@attributes }
+        }
       end
     end
   end

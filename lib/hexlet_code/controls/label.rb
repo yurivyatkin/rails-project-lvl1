@@ -10,11 +10,11 @@ module HexletCode
       end
 
       def build
-        control = {}
-        control[:as] = 'label'
-        control[:attributes] = { for: @name }
-        control[:content] = @name.capitalize
-        control
+        {
+          as: 'label',
+          attributes: { for: @name },
+          content: @name.capitalize
+        }
       end
     end
   end

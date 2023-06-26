@@ -10,11 +10,11 @@ module HexletCode
       end
 
       def build
-        control = {}
-        control[:as] = 'textarea'
-        control[:attributes] = { name: @name, cols: 20, rows: 40 }.merge(@attributes)
-        control[:content] = @value
-        control
+        {
+          as: 'textarea',
+          attributes: { name: @name, cols: 20, rows: 40 }.merge(@attributes),
+          content: @value
+        }
       end
     end
   end

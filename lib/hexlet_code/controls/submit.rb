@@ -9,10 +9,10 @@ module HexletCode
       end
 
       def build
-        control = {}
-        control[:as] = 'input'
-        control[:attributes] = { type: 'submit', value: @value }.merge(@attributes)
-        control
+        {
+          as: 'input',
+          attributes: { type: 'submit', value: @value }.merge(@attributes)
+        }
       end
     end
   end

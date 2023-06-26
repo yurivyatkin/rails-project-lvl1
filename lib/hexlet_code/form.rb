@@ -26,12 +26,12 @@ module HexletCode
     end
 
     def build
-      form = {}
       url = @form_options[:url] || '#'
       rest = @form_options.except(:url)
-      form[:options] = { action: url, method: 'post' }.merge(rest)
-      form[:controls] = @controls
-      form
+      {
+        options: { action: url, method: 'post' }.merge(rest),
+        controls: @controls
+      }
     end
   end
 end
